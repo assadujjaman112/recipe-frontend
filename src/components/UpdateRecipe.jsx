@@ -13,6 +13,7 @@ const UpdateRecipe = () => {
   const {
     register,
     handleSubmit,
+    formState: { errors },
   } = useForm();
 
   const handleChange = (selectedIngredient) => {
@@ -51,9 +52,14 @@ const UpdateRecipe = () => {
             </label>
             <input
               placeholder="Recipe Title"
-              {...register("title")}
+              {...register("title", { required: true })}
               className="input input-bordered w-full"
             />
+            {errors.title && (
+              <p className="text-red-700 mt-1 font-semibold">
+                Title is Required
+              </p>
+            )}
           </div>
           <div className="w-1/2">
             <label className="label">
@@ -61,9 +67,14 @@ const UpdateRecipe = () => {
             </label>
             <input
               placeholder="Recipe Instruction"
-              {...register("instruction")}
+              {...register("instruction", { required: true })}
               className="input input-bordered w-full"
             />
+            {errors.instruction && (
+              <p className="text-red-700 mt-1 font-semibold">
+                Instruction is Required
+              </p>
+            )}
           </div>
         </div>
         <div className="flex gap-5">
@@ -73,15 +84,21 @@ const UpdateRecipe = () => {
             </label>
             <input
               placeholder=" Image URL"
-              {...register("image")}
+              {...register("image", { required: true })}
               className="input input-bordered w-full"
             />
+            {errors.image && (
+              <p className="text-red-700 mt-1 font-semibold">
+                Instruction is Required
+              </p>
+            )}
           </div>
           <div className="w-1/2">
             <label className="label">
               <span className="label-text">Recipe Ingredients</span>
             </label>
             <Select
+              required
               options={ingredients}
               value={selectedIngredients}
               onChange={handleChange}
